@@ -1,0 +1,35 @@
+# Build and artifacts
+build/
+bin/
+*.o
+*.so
+*.dylib
+*.a
+*.dll
+
+# Janet packaging
+.jpm/
+jpm_tree/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+env/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Data and simulation artifacts
+output/
+*.log
+*.geojson
+*.csv
+*.bin
+*.dat
+
+# Operating system
+.DS_Store
+Thumbs.db
