@@ -12,33 +12,23 @@
   (set *failed-assertions* 0)
   (set *failures* @[]))
 
-(defn record-pass []
+(defn assert-true [condition &opt msg]
   (++ *total-assertions*)
-  (++ *passed-assertions*))
+  (if condition
+    (++ *passed-assertions*)
+    (do
+      (++ *failed-assertions*)
+      (def m (or msg "Expected truthy value but got false/nil"))
+      (array/push *failures* {:message m :loc "assert-true"}))))
 
-(defn record-fail [msg file line]
+(defn assert-false [condition &opt msg]
   (++ *total-assertions*)
-  (++ *failed-assertions*))
-
-(defmacro assert-true [condition &opt msg]
-  (def default-msg (string "Expected truthy value but got: " (string/format "%q" condition)))
-  (def final-msg (or msg default-msg))
-  ~(if ,condition
-     (,record-pass)
-     (do
-       (++ *total-assertions*)
-       (++ *failed-assertions*)
-       (array/push *failures* {:message ,final-msg :loc "assert-true"}))))
-
-(defmacro assert-false [condition &opt msg]
-  (def default-msg (string "Expected falsey value but got: " (string/format "%q" condition)))
-  (def final-msg (or msg default-msg))
-  ~(if (not ,condition)
-     (,record-pass)
-     (do
-       (++ *total-assertions*)
-       (++ *failed-assertions*)
-       (array/push *failures* {:message ,final-msg :loc "assert-false"}))))
+  (if (not condition)
+    (++ *passed-assertions*)
+    (do
+      (++ *failed-assertions*)
+      (def m (or msg "Expected falsey value but got truthy"))
+      (array/push *failures* {:message m :loc "assert-false"}))))
 
 (defn assert-equal [expected actual &opt msg]
   (++ *total-assertions*)
