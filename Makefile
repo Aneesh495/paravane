@@ -1,4 +1,4 @@
-.PHONY: all build test clean lint check-style sim help
+.PHONY: all build test test-c clean lint check-style sim help
 
 JANET ?= janet
 PYTHON ?= python3
@@ -15,10 +15,20 @@ build:
 	@for f in $(SRC_JANET); do \
 		$(JANET) -c $$f /dev/null || exit 1; \
 	done
-	@echo "==> Janet syntax verification passed."
+	@echo "==> Building native C acceleration library..."
+	@mkdir -p build
+	@$(CC) $(CFLAGS) -dynamiclib -I./c c/paravane_native.c -o build/libparavane_native.dylib -lm 2>/dev/null || \
+	 $(CC) $(CFLAGS) -shared -I./c c/paravane_native.c -o build/libparavane_native.so -lm
+	@echo "==> Build complete."
 
-test:
-	@echo "==> Running test suite..."
+test-c:
+	@echo "==> Running C native acceleration test suite..."
+	@mkdir -p build
+	@$(CC) $(CFLAGS) -I./c c/paravane_native.c test/test_native.c -o build/test_native_bin -lm
+	@./build/test_native_bin
+
+test: test-c
+	@echo "==> Running Janet test suite..."
 	@$(JANET) test/runner.janet
 
 sim:
