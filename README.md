@@ -286,15 +286,15 @@ Paravane maintains 100% test pass rates across 10 specialized test suites and 21
 
 ---
 
-## Mathematical References
+## Implemented Oceanographic Models
 
-1. **Chen, C. T., & Millero, F. J. (1977)**. *Speed of sound in seawater at high pressures*. The Journal of the Acoustical Society of America, 62(5), 1129-1135.
-2. **Saunders, P. M. (1981)**. *Practical conversion of pressure to depth*. Journal of Physical Oceanography, 11(4), 573-574.
-3. **Munk, W. H. (1974)**. *Sound channel in an exponentially stratified ocean, with application to SOFAR*. The Journal of the Acoustical Society of America, 55(2), 220-226.
-4. **Fossen, T. I. (2011)**. *Handbook of Marine Craft Hydrodynamics and Motion Control*. John Wiley & Sons.
-5. **Thorp, W. H. (1967)**. *Analytic description of the low-frequency attenuation coefficient*. The Journal of the Acoustical Society of America, 42(1), 270-270.
-6. **Welford, B. P. (1962)**. *Note on a method for calculating corrected sums of squares and products*. Technometrics, 4(3), 419-420.
-7. **NATO STO (2014)**. *JANUS: An Interoperable Digital Underwater Acoustic Communications Protocol*. IEEE 1841 standard for underwater communications.
+- **Seawater Density**: UNESCO IES-80 international equation of state formulation.
+- **Hydrostatic Depth**: Saunders (1981) latitude-dependent pressure-to-depth polynomial.
+- **Sound Velocity**: UNESCO Chen-Millero, Mackenzie 9-term, and canonical Munk SOFAR duct profiles.
+- **Subsea Kinematics**: SNAME notation and 6-DOF marine craft dynamics.
+- **Chemical Attenuation**: Thorp and Francois-Garrison low-frequency absorption equations.
+- **Online Variance**: Welford single-pass statistical accumulation.
+- **Acoustic Packets**: JANUS IEEE 1841 telemetry framing and CCITT CRC-16 checksums.
 
 ---
 
